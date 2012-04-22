@@ -24,6 +24,7 @@ public class Main
         //Create and set up the window.
         JFrame frame = new JFrame();
         frame.getContentPane().add(new JTextArea(18, 28));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Display the window.
         frame.pack();
         frame.setLocationRelativeTo(null);
