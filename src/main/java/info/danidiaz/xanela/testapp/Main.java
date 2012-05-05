@@ -23,6 +23,7 @@ public class Main
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame();
+        frame.setTitle("foo frame");
         frame.getContentPane().add(new JTextArea(18, 28));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Display the window.
