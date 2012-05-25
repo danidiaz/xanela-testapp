@@ -36,6 +36,7 @@ public class Main
         frame.getContentPane().setLayout(new BorderLayout());        
         frame.getContentPane().add(new JTextArea(18, 28),BorderLayout.CENTER);
         JButton fooButton = new JButton("foo");
+        fooButton.setToolTipText("foo tooltip");
         fooButton.addActionListener(new ActionListener() {
             
             @Override
