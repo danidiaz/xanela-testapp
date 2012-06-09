@@ -1,10 +1,12 @@
 package info.danidiaz.xanela.testapp;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -47,8 +49,9 @@ public class Main
         });
         frame.getContentPane().add(fooButton,BorderLayout.SOUTH);
         
-        JPanel westPanel = new JPanel(new BorderLayout());
-        westPanel.add(new JComboBox(new Object [] { "aaa","bbb","cccc"}), BorderLayout.NORTH);
+        JPanel westPanel = new JPanel(new GridLayout(6,1));
+        westPanel.add(new JComboBox(new Object [] { "aaa","bbb","cccc"}));
+        westPanel.add(new JCheckBox("This is a checkbox"));
         
         frame.getContentPane().add(westPanel,BorderLayout.EAST);
         frame.getContentPane().add(new JTextField(18),BorderLayout.NORTH);
