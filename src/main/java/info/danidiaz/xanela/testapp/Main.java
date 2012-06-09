@@ -7,9 +7,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -53,8 +57,23 @@ public class Main
         westPanel.add(new JComboBox(new Object [] { "aaa","bbb","cccc"}));
         westPanel.add(new JCheckBox("This is a checkbox"));
         
+                
+        JMenu menu = new JMenu("Menu1");
+        JMenuItem item1 = new JMenuItem("item1"); 
+        JMenuItem item2 = new JMenuItem("item2");        
+        menu.add(item1);
+        menu.add(item2);
+        JMenu subMenu = new JMenu("SubMenu1");        
+        subMenu.add(new JMenuItem("submenuitem1"));
+        subMenu.add(new JCheckBoxMenuItem("submenuitem2"));
+        menu.add(subMenu);         
+        
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(menu);
+  
         frame.getContentPane().add(westPanel,BorderLayout.EAST);
         frame.getContentPane().add(new JTextField(18),BorderLayout.NORTH);
+        frame.setJMenuBar(menuBar);  
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Display the window.
         frame.pack();
