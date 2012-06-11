@@ -11,6 +11,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -56,6 +57,7 @@ public class Main
         JPanel westPanel = new JPanel(new GridLayout(6,1));
         westPanel.add(new JComboBox(new Object [] { "aaa","bbb","cccc"}));
         westPanel.add(new JCheckBox("This is a checkbox"));
+        westPanel.add(new JLabel("This is a label"));
         
                 
         JMenu menu = new JMenu("Menu1");
