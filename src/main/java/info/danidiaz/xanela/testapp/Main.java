@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -60,23 +62,40 @@ public class Main
         westPanel.add(new JLabel("This is a label"));
         
                 
+  
+  
+        frame.getContentPane().add(westPanel,BorderLayout.EAST);
+        final JTextField tf = new JTextField(18);
+        frame.getContentPane().add(tf,BorderLayout.NORTH);
+        
+        
+        
         JMenu menu = new JMenu("Menu1");
         JMenuItem item1 = new JMenuItem("item1"); 
         JMenuItem item2 = new JMenuItem("item2");        
         menu.add(item1);
         menu.add(item2);
-        JMenu subMenu = new JMenu("SubMenu1");        
-        subMenu.add(new JMenuItem("submenuitem1"));
+        JMenu subMenu = new JMenu("SubMenu1");     
+        JMenuItem menuitem1 = new JMenuItem("submenuitem1");
+        menuitem1.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                tf.setText("nananiero");
+                
+            }
+        });
+        subMenu.add(menuitem1);
         subMenu.add(new JCheckBoxMenuItem("submenuitem2"));
         menu.add(subMenu);         
         
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(menu);
-  
-        frame.getContentPane().add(westPanel,BorderLayout.EAST);
-        frame.getContentPane().add(new JTextField(18),BorderLayout.NORTH);
-        frame.setJMenuBar(menuBar);  
+        frame.setJMenuBar(menuBar);
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                
+        
         //Display the window.
         frame.pack();
         frame.setLocationRelativeTo(null);
