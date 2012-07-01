@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,6 +21,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -59,7 +63,39 @@ public class Main
         JPanel westPanel = new JPanel(new GridLayout(6,1));
         westPanel.add(new JComboBox(new Object [] { "aaa","bbb","cccc"}));
         westPanel.add(new JCheckBox("This is a checkbox"));
-        westPanel.add(new JLabel("This is a label"));
+        
+        
+        JLabel label = new JLabel("This is a label");
+        
+        final JPopupMenu popup = new JPopupMenu();
+        JMenuItem popupitem1 = new JMenuItem("popupitem1"); 
+        JMenuItem popupitem2 = new JMenuItem("popupitem2");
+        popup.add(popupitem1);
+        popup.add(popupitem2);
+        label.addMouseListener(new  MouseAdapter() {
+            
+            @Override
+            public void mousePressed(MouseEvent e){
+                System.out.println("pressed!");
+                if (e.isPopupTrigger())
+                    doPop(e);
+            }
+            @Override
+            public void mouseReleased(MouseEvent e){
+                System.out.println("released!");
+                if (e.isPopupTrigger())
+                    doPop(e);
+            }
+
+            private void doPop(MouseEvent e){                
+                popup.show(e.getComponent(), e.getX(), e.getY());
+            }
+             
+        });
+
+        
+        westPanel.add(label);
+        
         
                 
   
