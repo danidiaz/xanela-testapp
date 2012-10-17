@@ -129,7 +129,7 @@ public class Main
         menuBar.add(menu);
         frame.setJMenuBar(menuBar);
         
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 
         
         //Display the window.
