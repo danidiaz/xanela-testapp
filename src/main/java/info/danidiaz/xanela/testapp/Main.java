@@ -92,13 +92,8 @@ public class Main
             }
              
         });
-
-        
-        westPanel.add(label);
-        
-        
-                
-  
+      
+        westPanel.add(label);  
   
         frame.getContentPane().add(westPanel,BorderLayout.EAST);
         final JTextField tf = new JTextField(18);
@@ -117,7 +112,7 @@ public class Main
             
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                tf.setText("nananiero");
+                tf.setText("nananiero nananiero nananiero");
                 
             }
         });
