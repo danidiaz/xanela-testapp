@@ -61,7 +61,17 @@ public class Main
         frame.getContentPane().add(fooButton,BorderLayout.SOUTH);
         
         JPanel westPanel = new JPanel(new GridLayout(6,1));
-        westPanel.add(new JComboBox(new Object [] { "aaa","bbb","cccc"}));
+        westPanel.add(new JComboBox(new Object [] { "aaa","bbb","ccc",
+                "ddd",
+                "eee",
+                "fff",
+                "ggg",
+                "hhh",
+                "iii",
+                "111",
+                "222",
+                "333"                
+            }));
         westPanel.add(new JCheckBox("This is a checkbox"));
         
         
