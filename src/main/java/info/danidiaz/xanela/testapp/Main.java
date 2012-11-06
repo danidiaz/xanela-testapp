@@ -22,8 +22,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Hello world!
@@ -31,23 +34,23 @@ import javax.swing.JTextField;
  */
 public class Main 
 {
+    private final JTextField tf = new JTextField(18);   
+    
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
         
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGUI();
+                new Main().createAndShowGUI();
             }
         });
     }
-    
-    private static void createAndShowGUI() {
-        //Create and set up the window.
-        final JFrame frame = new JFrame();
-        frame.setTitle("foo frame");
-        frame.getContentPane().setLayout(new BorderLayout());        
-        frame.getContentPane().add(new JTextArea(18, 28),BorderLayout.CENTER);
+        
+    private JPanel createTabOne(final JFrame parentFrame) {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        
+        mainPanel.add(new JTextArea(18, 28),BorderLayout.CENTER);
         JButton fooButton = new JButton("foo");
         fooButton.setToolTipText("foo tooltip");
         fooButton.addActionListener(new ActionListener() {
@@ -55,10 +58,10 @@ public class Main
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                createAndShowDialog(frame);
+                new Main().createAndShowDialog(parentFrame);
             }
         });
-        frame.getContentPane().add(fooButton,BorderLayout.SOUTH);
+        mainPanel.add(fooButton,BorderLayout.SOUTH);
         
         JPanel westPanel = new JPanel(new GridLayout(6,1));
         westPanel.add(new JComboBox(new Object [] { "aaa","bbb","ccc",
@@ -86,13 +89,11 @@ public class Main
             
             @Override
             public void mousePressed(MouseEvent e){
-                System.out.println("pressed!");
                 if (e.isPopupTrigger())
                     doPop(e);
             }
             @Override
             public void mouseReleased(MouseEvent e){
-                System.out.println("released!");
                 if (e.isPopupTrigger())
                     doPop(e);
             }
@@ -105,11 +106,43 @@ public class Main
       
         westPanel.add(label);  
   
-        frame.getContentPane().add(westPanel,BorderLayout.EAST);
-        final JTextField tf = new JTextField(18);
-        frame.getContentPane().add(tf,BorderLayout.NORTH);
+        mainPanel.add(westPanel,BorderLayout.EAST);
+        mainPanel.add(tf,BorderLayout.NORTH); 
         
+        return mainPanel;
+    }
+    
+    private JPanel createTabTwo(final JFrame parentFrame) {
+        JPanel mainPanel = new JPanel(new BorderLayout());
         
+        JTable table = new JTable(new DefaultTableModel(               
+                    new Object[][] {
+                            new Object[] { "row1", 2, 3  },
+                            new Object[] { "row2", 4 , 6 },
+                            new Object[] { "row3", 6 , 7 },
+                    },                
+                    
+                    new Object[] { "col1", "col2", "col3" }                              
+                ));
+        mainPanel.add(table,BorderLayout.CENTER);
+        return mainPanel;
+    }
+
+    
+    private void createAndShowGUI() {
+        //Create and set up the window.
+        final JFrame frame = new JFrame();
+        frame.setTitle("foo frame");
+        
+        frame.getContentPane().setLayout(new BorderLayout());
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("tab one", createTabOne(frame));
+        tabbedPane.setToolTipTextAt(0, "tooltip for tab one");
+        tabbedPane.addTab("tab two", createTabTwo(frame));
+        tabbedPane.setToolTipTextAt(1, "tooltip for tab two");
+
+        frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+                     
         
         JMenu menu = new JMenu("Menu1");
         JMenuItem item1 = new JMenuItem("item1"); 
@@ -143,7 +176,7 @@ public class Main
         frame.setVisible(true);
     }
     
-    private static void createAndShowDialog(JFrame frame) {
+    private void createAndShowDialog(JFrame frame) {
         final JDialog dialog = new JDialog(frame,true);
         dialog.setTitle("foo dialog");
         dialog.getContentPane().setLayout(new BorderLayout());
