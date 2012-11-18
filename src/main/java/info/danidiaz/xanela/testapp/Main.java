@@ -22,11 +22,18 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
 
 /**
  * Hello world!
@@ -128,6 +135,34 @@ public class Main
         return mainPanel;
     }
 
+    private JPanel createTabJTree(final JFrame parentFrame, boolean showroot) {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("this is the root");
+        DefaultMutableTreeNode leafa = new DefaultMutableTreeNode("leaf a");
+        root.add(leafa);
+        DefaultMutableTreeNode leafaa = new DefaultMutableTreeNode("leaf a a");
+        leafa.add(leafaa);
+        
+        DefaultMutableTreeNode leafaaa = new DefaultMutableTreeNode("leaf a a a");
+        DefaultMutableTreeNode leafaab = new DefaultMutableTreeNode("leaf a a b");
+        DefaultMutableTreeNode leafaac = new DefaultMutableTreeNode("leaf a a c");
+        leafaa.add(leafaaa);
+        leafaa.add(leafaab);
+        leafaa.add(leafaac);
+        
+        DefaultMutableTreeNode leafab = new DefaultMutableTreeNode("leaf a b");
+        leafa.add(leafab);
+        DefaultMutableTreeNode leafb = new DefaultMutableTreeNode("leaf b");
+        root.add(leafb);
+        
+        DefaultTreeModel model = new DefaultTreeModel(root);
+      
+        JTree tree = new JTree(model);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tree.setRootVisible(showroot);
+        mainPanel.add(new JScrollPane(tree),BorderLayout.CENTER);
+        return mainPanel;
+    }
     
     private void createAndShowGUI() {
         //Create and set up the window.
@@ -140,6 +175,10 @@ public class Main
         tabbedPane.setToolTipTextAt(0, "tooltip for tab one");
         tabbedPane.addTab("tab two", createTabTwo(frame));
         tabbedPane.setToolTipTextAt(1, "tooltip for tab two");
+        tabbedPane.addTab("tab JTree a", createTabJTree(frame,true));
+        tabbedPane.setToolTipTextAt(1, "tooltip for tab three");
+        tabbedPane.addTab("tab JTree b", createTabJTree(frame,false));
+        tabbedPane.setToolTipTextAt(1, "tooltip for tab four");
 
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
                      
