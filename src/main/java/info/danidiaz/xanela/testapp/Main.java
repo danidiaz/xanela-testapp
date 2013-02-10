@@ -164,6 +164,19 @@ public class Main
         return mainPanel;
     }
     
+    private JPanel createTabLabeledFields(final JFrame parentFrame) {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel gridPanel = new JPanel(new GridLayout(3,2,10,10));
+        gridPanel.add(new JLabel("label1"));
+        gridPanel.add(new JTextField(10));
+        gridPanel.add(new JLabel("label2"));
+        gridPanel.add(new JTextField(10));
+        gridPanel.add(new JLabel("label3"));        
+        gridPanel.add(new JButton("boo"));
+        mainPanel.add(gridPanel,BorderLayout.NORTH);
+        return mainPanel;
+    }
+    
     private void createAndShowGUI() {
         //Create and set up the window.
         final JFrame frame = new JFrame();
@@ -176,9 +189,11 @@ public class Main
         tabbedPane.addTab("tab two", createTabTwo(frame));
         tabbedPane.setToolTipTextAt(1, "tooltip for tab two");
         tabbedPane.addTab("tab JTree a", createTabJTree(frame,true));
-        tabbedPane.setToolTipTextAt(1, "tooltip for tab three");
+        tabbedPane.setToolTipTextAt(2, "tooltip for tab three");
         tabbedPane.addTab("tab JTree b", createTabJTree(frame,false));
-        tabbedPane.setToolTipTextAt(1, "tooltip for tab four");
+        tabbedPane.setToolTipTextAt(3, "tooltip for tab four");
+        tabbedPane.addTab("labels", createTabLabeledFields(frame));
+        tabbedPane.setToolTipTextAt(4, "tooltip for labels");
 
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
                      
